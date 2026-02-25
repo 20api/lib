@@ -411,6 +411,207 @@ class _TipCalculatorUIState extends State<TipCalculatorUI> {
     );
   }
 }
+/////////CAL2////
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const AppHome());
+}
+
+class AppHome extends StatelessWidget {
+  const AppHome({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: countApp(),
+    );
+  }
+}
+
+class countApp extends StatefulWidget {
+  const countApp({super.key});
+  @override
+  State<countApp> createState() => _countAppState();
+}
+
+class _countAppState extends State<countApp> {
+  final TextEditingController billController = TextEditingController();
+
+  double tipPecentage = 0.0;
+  double tipAmount = 0.0;
+  double billAmount = 0.0;
+
+  void calTipPer() {
+    // get bill from user input
+    double bill = double.tryParse(billController.text) ?? 0;
+    setState(() {
+      tipAmount = bill * tipPecentage / 100;
+      billAmount = bill + tipAmount;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          "Tip Calculator",
+          style: TextStyle(
+            fontSize: 32.0,
+            fontWeight: FontWeight.bold,
+            color: Color.fromARGB(255, 236, 235, 235),
+          ),
+        ),
+        centerTitle: true,
+        backgroundColor: const Color.fromARGB(255, 3, 50, 69),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // 1. Card
+            Card(
+              //color: const Color.fromARGB(233, 12, 122, 120),
+              shadowColor: const Color.fromARGB(255, 67, 51, 5),
+              elevation: 4,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Column(
+                  children: [
+                    const Text(
+                      "Bill Amount",
+                      style: TextStyle(
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 5, 0, 0),
+                      ),
+                    ),
+                    const SizedBox(height: 15.0),
+                    TextField(
+                      controller: billController,
+                      keyboardType: TextInputType.number,
+                      decoration: const InputDecoration(
+                        fillColor: Color.fromARGB(255, 168, 15, 15),
+                        hintText: "Enter Bill amount",
+                        hoverColor: Colors.amber,
+                        border: OutlineInputBorder(),
+                        prefixIcon: Icon(Icons.attach_money),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 20.0),
+
+            // 2. Card
+            Card(
+              //color: const Color.fromARGB(233, 12, 122, 120),
+              shadowColor: const Color.fromARGB(255, 67, 51, 5),
+              elevation: 4,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Column(
+                  children: [
+                    Text(
+                      "Tip Percentage: ${tipPecentage.toInt()}%",
+                      style: const TextStyle(
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 5, 0, 0),
+                      ),
+                    ),
+                    const SizedBox(height: 15.0),
+                    Slider(
+                      value: tipPecentage,
+                      onChanged: (value) {
+                        setState(() {
+                          tipPecentage = value;
+                        });
+                      },
+                      min: 0,
+                      max: 50,
+                      divisions: 50,
+                      label: "${tipPecentage.toInt()}",
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 20),
+
+            // 3. Button
+            SizedBox(
+              width: double.infinity,
+              height: 50,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                ),
+                onPressed: calTipPer,
+                child: const Text(
+                  "Calculate",
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 20.0),
+            // 4. Card
+            Card(
+              //color: const Color.fromARGB(233, 12, 122, 120),
+              shadowColor: const Color.fromARGB(255, 67, 51, 5),
+              elevation: 4,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Column(
+                  children: [
+                    Text(
+                      "TiP: \$${tipAmount.toStringAsFixed(2)}",
+                      style: const TextStyle(
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 5, 0, 0),
+                      ),
+                    ),
+                    const SizedBox(height: 15.0),
+                    Text(
+                      "Bill: \$${billAmount.toStringAsFixed(2)}",
+                      style: const TextStyle(
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 5, 0, 0),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
 
 
 /////////////////////////interface///////////////
@@ -742,6 +943,7 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
 
 
 
