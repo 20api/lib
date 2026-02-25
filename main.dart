@@ -415,3 +415,333 @@ class _TipCalculatorUIState extends State<TipCalculatorUI> {
 
 /////////////////////////interface///////////////
 
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: StudentHousePage(),
+    );
+  }
+}
+
+class StudentHousePage extends StatelessWidget {
+  const StudentHousePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+
+      /// APP BAR WITH MULTIPLE SELECTION AREAS
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 1,
+        title: const Text(
+          "House Meet",
+          style: TextStyle(color: Colors.black),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {},
+            child: const Text("Home",
+                style: TextStyle(color: Colors.black)),
+          ),
+          TextButton(
+            onPressed: () {},
+            child: const Text("Houses",
+                style: TextStyle(color: Colors.black)),
+          ),
+          TextButton(
+            onPressed: () {},
+            child: const Text("Events",
+                style: TextStyle(color: Colors.black)),
+          ),
+          TextButton(
+            onPressed: () {},
+            child: const Text("Results",
+                style: TextStyle(color: Colors.black)),
+          ),
+        ],
+      ),
+
+      /// BODY
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+
+            /// IMAGE BANNER
+            Container(
+              height: 180,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                image: const DecorationImage(
+                  image: AssetImage("images/pngt.jpg"),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 20),
+
+            /// TITLE
+            const Text(
+              "Select Your House",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+
+            const SizedBox(height: 12),
+
+            /// HOUSE BUTTONS
+            _houseButton("Red House"),
+            _houseButton("Blue House"),
+            _houseButton("Green House"),
+            _houseButton("Yellow House"),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// SIMPLE HOUSE BUTTON
+  Widget _houseButton(String name) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: ElevatedButton(
+        onPressed: () {},
+        style: ElevatedButton.styleFrom(
+          minimumSize: const Size(double.infinity, 50),
+          backgroundColor: Colors.grey,
+          foregroundColor: Colors.black,
+        ),
+        child: Text(name),
+      ),
+    );
+  }
+}
+
+////pubspec yaml////////
+
+name: game_explore_ui
+description: A modern game explore UI built with Flutter
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^3.0.0
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - images/pngt.jpg
+
+
+///////interface2///////
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: PizzaHome(),
+    );
+  }
+}
+
+class PizzaHome extends StatefulWidget {
+  const PizzaHome({super.key});
+
+  @override
+  State<PizzaHome> createState() => _PizzaHomeState();
+}
+
+class _PizzaHomeState extends State<PizzaHome> {
+  int cheeseCount = 20;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.grey.shade100,
+
+      /// APP BAR
+      appBar: AppBar(
+        backgroundColor: Colors.orange,
+        title: const Text(
+          "hello",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
+      ),
+
+      /// BODY
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            ///  ROW
+            Card(
+              elevation: 2,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Image.network(
+                      "https://.....",
+                      height: 90,
+                    ),
+                    Image.network(
+                      "https:......",
+                      height: 90,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 20),
+
+            /// TITLE
+            const Text(
+              "Customize Your Order",
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+
+            const SizedBox(height: 20),
+
+            /// MAIN PIZZA IMAGE
+            Image.network(
+              "https://....",
+              height: 180,
+            ),
+
+            const SizedBox(height: 30),
+
+            ///  COUNTER CARD
+            Card(
+              elevation: 2,
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      "how much",
+                      style: TextStyle(fontSize: 18),
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          "$cheeseCount",
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        FloatingActionButton(
+                          mini: true,
+                          backgroundColor: Colors.orange,
+                          onPressed: () {
+                            setState(() {
+                              cheeseCount++;
+                            });
+                          },
+                          child: const Icon(Icons.add),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+
+      /// BOTTOM NAVIGATION
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: 0,
+        selectedItemColor: Colors.orange,
+        unselectedItemColor: Colors.grey,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: "Home",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: "Search",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_cart),
+            label: "Cart",
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+///pubspec//
+name: pizza_order_app
+description: A simple stateful Flutter pizza order UI
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+
+
+
